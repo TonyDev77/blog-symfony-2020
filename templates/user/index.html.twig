@@ -1,0 +1,50 @@
+{#
+    AS FORMATAÇÕES EM CSS ESTÃO VINDO DE UM LINK CSS EM: 'base.html'
+    E TAMBÉM DO TEMPLATE EM config/packages/twig.yaml
+
+    Os alertas estão vindo de templates/includes/messages.html.twig, incluído em base.html.twig
+ #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Usuários</h1>
+
+    {# Os estilos css estão vindo da 'base.twig.html', de um link copiado do site bootstrap #}
+    <a href="{{ path('user_create') }}" class="btn btn-sm btn-success">Criar Usuário</a>
+    <hr>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Email</th>
+            <th>Criado em</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        {# Esse laço faz uma varredura par buscar todos os usuários #}
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.createdAt|date('d/m/Y H:i:s') }}</td>
+                <td>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                    <a href="{{ path('user_remove', {'id': user.id}) }}" class="btn btn-sm btn-danger">Remover</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}
+
+{% block title %}
+    Usuários
+{% endblock %}
+

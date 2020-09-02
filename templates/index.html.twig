@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block body %}
+
+    <h1>{{ title }}</h1> {# Rece essa variavel de uma array em 'DefalutController' #}
+
+    {% if nome is defined %} {# similar ao 'isSet' #}
+        <h2>{{ nome }}</h2>
+    {% endif %}
+
+    {# Lista de Postagens #}
+    {#
+        O laço abaixo varre um array de dados que vem
+        la de DegaultController
+    #}
+    {% for post in posts %}
+        <li>
+            {{ post.id }} - {{ post.title }} -
+            {{ post.created_at|date("d/m/Y H:i:s")}} {# usa pipe "|" p/ filtro de data #}
+        </li>
+    {% endfor %}
+
+    {%  include 'include.html.twig' %} {# Ecemplo de include#}
+
+    {{ 'Tony' ~ ' Silva' }} {# p/ concatenar use o "~" #}
+    <br><br>
+
+    {{ title ~ ' String' }} {# Exemplo de concatenção com variáveis#}
+    <br><br>
+
+    {{ 3 + 4 }} {# Exemplo de operações matemáticas #}
+    <br>
+
+    {{ 7 > 2 ? 'sim' : 'não' }}
+
+
+    {# ========= FORMATACAO CSS PARA TRABALHAR A NOITE ========== #}
+    <style>
+        /** {*/
+        /*    background-color: #373c49;*/
+        /*    color: #ced4e0;*/
+        /*}*/
+    </style>
+{% endblock %}
+
+

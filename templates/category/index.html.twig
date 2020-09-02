@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gerenciamento de Categorias{% endblock %}
+
+{% block body %}
+
+    <h1>Categorias</h1>
+
+    {# Os estilos css estão vindo da 'base.twig.html', de um link copiado do site bootstrap #}
+    <a href="{{ path('category_create') }}" class="btn btn-sm btn-success">Criar Categoria</a>
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Criado em</th>
+            </tr>
+        </thead>
+        <tbody>
+        {# Esse laço faz uma varredura par buscar todos os usuários #}
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.createdAt|date('d/m/Y H:i:s') }}</td>
+                <td>
+                    <a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                    <a href="{{ path('category_remove', {'id': category.id}) }}" class="btn btn-sm btn-danger">Remover</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{#
+    AS FORMATAÇÕES EM CSS ESTÃO VINDO DE UM LINK CSS EM: 'base.html'
+    E TAMBÉM DO TEMPLATE EM config/packages/twig.yaml
+
+    Os alertas estão vindo de templates/includes/messages.html.twig, incluído em base.html.twig
+ #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Edição de Usuário!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    {# A vriável 'form' abaixo veio da classe 'UserController' #}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-lg btn-success">Atualizar Usuário</button> {# A dica é criar o botão de envio aqui, como foi feiro, e não na classe #}
+    {{ form_end(form) }}
+</div>
+{% endblock %}

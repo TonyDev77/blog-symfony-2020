@@ -1,0 +1,22 @@
+{#
+    O laço abaixo varre as mensagens contidas no método flash,
+    usando a chave que eu criei: 'succes'
+#}
+
+{% for message in app.session.flashBag.get('success') %}
+    <div class="alert alert-succsess">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.session.flashBag.get('warning') %}
+    <div class="alert alert-warning">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.session.flashBag.get('errors') %}
+    <div class="alert alert-errors">
+        {{ message }}
+    </div>
+{% endfor %}

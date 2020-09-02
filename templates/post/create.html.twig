@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Criar Post
+{% endblock %}
+
+{% block body %}
+
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+{#    <form action="{{ path('post_save') }}" method="post"> #}{# Envia para o endereço do path#}
+
+{#        <p>#}
+{#            <label>Titulo da Postagem</label>#}
+{#            <input type="text" name="title">#}
+{#        </p>#}
+
+{#        <p>#}
+{#            <label>Descrição da Postagem</label>#}
+{#            <input type="text" name="description">#}
+{#        </p>#}
+
+{#        <p>#}
+{#            <label>Conteúdo da Postagem</label>#}
+{#            <textarea name="content" id="" cols="30" rows="10"></textarea>#}
+{#        </p>#}
+
+{#        <p>#}
+{#            <label>Slug</label>#}
+{#            <input type="text" name="slug">#}
+{#        </p>#}
+
+{#        <p>#}
+{#            <button type="submit" class="btn btn-lg btn-success">Criar Postagem</button>#}
+{#        </p>#}
+{#    </form>#}
+
+    <div class="example-wrapper">
+        {# A vriável 'form' abaixo veio da classe 'UserController' #}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-lg btn-success">Criar Post</button> {# A dica é criar o botão de envio aqui, como foi feiro, e não na classe #}
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+
+
+
