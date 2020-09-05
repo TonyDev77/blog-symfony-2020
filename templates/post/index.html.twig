@@ -11,18 +11,20 @@
     <hr>
     <table class="table">
         <thead>
-        <tr>
-            <th>ID</th>
-            <th>Post</th>
-            <th>Criado em</th>
-            <th>Ações</th>
-        </tr>
+            <tr>
+                <th>#</th>
+                <th>Autor</th>
+                <th>Post</th>
+                <th>Criado em</th>
+                <th>Ações</th>
+            </tr>
         </thead>
         <tbody>
         {# Esse laço faz uma varredura par buscar todos os usuários #}
         {% for post in posts %}
             <tr>
                 <td>{{ post.id }}</td>
+                <td>{{ post.author.firstName }}</td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.createdAt|date('d/m/Y H:i:s') }}</td>
                 <td>

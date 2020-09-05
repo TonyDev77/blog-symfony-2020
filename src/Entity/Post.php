@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
- * @ORM\Table(name="Posts")
+ * @ORM\Table(name="posts")
  */
 class Post
 {
@@ -47,6 +48,25 @@ class Post
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
+
+    // RELACIONAMENTOS MUITOS P/ UM -----------------------------
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
+     */
+    private $author;
+
+    // RELACIONAMENTOS MUITOS P/ MUITOS ------------------------
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="postCollection")
+     */
+    private $categoryCollection;
+
+    public function __construct() // criando array p/ trabalhar com tabelas
+    {
+        $this->categoryCollection = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -124,4 +144,40 @@ class Post
 
         return $this;
     }
+
+    // getters e setter p/ author
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+
+    // getters e setters many to many
+    public function getCategoryCollection()
+    {
+        return $this->categoryCollection;
+    }
+
+    public function setCategoryCollection(Category $categoryCollection): self
+    {
+        if ($this->categoryCollection->contains($categoryCollection))
+            return $this;
+
+        $this->categoryCollection->add($categoryCollection);
+
+        return $this;
+    }
+
+    // possibilita a impressao na view
+//    public function __toString()
+//    {
+//        return $this->title;
+//    }
 }

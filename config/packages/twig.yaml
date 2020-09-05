@@ -4,6 +4,6 @@ twig:
     strict_variables: '%kernel.debug%'
     exception_controller: null
 
-#    Eu inseri esse link para usar o template de css do synfony
+#    Eu inseri esse link para usar o template do bootstrap no synfony
     form_theme:
         - bootstrap_4_layout.html.twig

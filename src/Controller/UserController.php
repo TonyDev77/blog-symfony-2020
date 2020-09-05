@@ -33,13 +33,11 @@ class UserController extends AbstractController
     public function create(Request $request)
     {
 
-        $user = new User(); // Esse objeto vai ser a minha entity.
-
+        $user = new User(); // cria objeto entity User.
         $form = $this->createForm(UserType::class, $user); // Aqui, criamos o formulário par ser exibido na view
         $form->handleRequest($request); // Para reconhecer se o formulário foi submetido
 
         if ($form->isSubmitted()){
-
             $user = $form->getData(); // Recebe os dados do formulário via post.
             $user->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
             $user->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));

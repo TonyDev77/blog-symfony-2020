@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
-    // Nota. Dê uma olhada no App 'Notas'. Lá tem explicado como foi criado essa classe.
+    // Nota. Dê uma olhada no App 'Notas' (do mac). Lá tem explicado como foi criado essa classe.
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
