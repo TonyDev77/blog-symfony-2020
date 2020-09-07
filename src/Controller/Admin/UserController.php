@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserType;
@@ -8,9 +8,10 @@ use App\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * @Route("/users", name="user_")
+ * @Route("/admin/users", name="user_")
  */
 class UserController extends AbstractController
 {
@@ -30,7 +31,7 @@ class UserController extends AbstractController
     /**
      * @Route("/create", name="create")
      */
-    public function create(Request $request)
+    public function create(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
 
         $user = new User(); // cria objeto entity User.
@@ -39,6 +40,12 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted()){
             $user = $form->getData(); // Recebe os dados do formulário via post.
+
+            // encripta a senha do usuário
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword()); // pega a senha e usuário
+            $user->setPassword($password); // passa a senha para ser encriptada
+            $user->setRoles();
+
             $user->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
             $user->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
 

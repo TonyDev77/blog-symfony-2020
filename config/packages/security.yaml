@@ -26,8 +26,14 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+    # Encriptando a senha do usuário!!!
+    # Use o algoritmo 'argon2i' em vez de 'bcrypt' para php acima de 7.2
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/admin, roles: ROLE_USER } # Antes estava setado com: ROLE_ADMIN
         # - { path: ^/profile, roles: ROLE_USER }

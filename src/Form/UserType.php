@@ -17,6 +17,7 @@ class UserType extends AbstractType
             ->add('last_name')
             ->add('email')
             ->add('username')
+            ->add('password')
             // Os dados abaixo não precisam aparecer na view, pois serão automáticos
 //            ->add('created_at')
 //            ->add('updated_at')

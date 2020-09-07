@@ -22,4 +22,9 @@ class SecurityController extends AbstractController
             'last_username' => $lastUserName
         ]);
     }
+
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logout() {}
 }

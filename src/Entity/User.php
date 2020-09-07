@@ -159,7 +159,15 @@ class User implements UserInterface
     // IMPLEMENTA MÉTODOS DA CLASSE UserInterface (security)
     public function getRoles()
     {
-        return $this->roles;
+        $roles = explode(', ', $this->roles);
+        $roles[] = 'ROLE_USER';
+
+        return $roles;
+    }
+
+    public function setRoles()
+    {
+        $this->roles = 'ROLE_USER';
     }
 
     public function getUsername(): ?string
@@ -170,6 +178,11 @@ class User implements UserInterface
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
     }
 
     public function getSalt()
