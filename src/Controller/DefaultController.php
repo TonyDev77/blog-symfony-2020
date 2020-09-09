@@ -4,9 +4,10 @@
 namespace App\Controller;
 
 
+use App\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class DefaultController extends AbstractController
 {
@@ -17,30 +18,11 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
-        // Lista de array que será impresso via for em 'index.html.twig'
-        $posts = [
-            [
-                'id' => 1,
-                'title' => 'Post 1',
-                'created_at' => '2019-1-28 19:51:02'
-            ],
-            [
-                'id' => 2,
-                'title' => 'Post 2',
-                'created_at' => '2019-1-28 19:51:02'
-            ],
-            [
-                'id' => 3,
-                'title' => 'Post 3',
-                'created_at' => '2019-1-28 19:51:02'
-            ]
-
-        ];
+        $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
 
         // Abaixo, uma render com array enviando para a index o conjunto 'chave' => 'valor'
         return $this->render('index.html.twig', [
             'title' => 'Postagem Teste', // 'chave' => 'valor'
-//            'nome' => 'Tony Silva',
             'posts' => $posts
 
         ]);
@@ -49,13 +31,16 @@ class DefaultController extends AbstractController
 
     // passa valor dinâmico via url (slug)
     /**
-     * @Route("/post-exemplo/{param}")
+     * @Route("/post/{slug}", name="single_post")
      */
-    public function single($param) // Passagem pela url
+    public function single($slug) // Passagem pela url
     {
+        // busca no banco de dados baseado na coluna slug
+        $post = $this->getDoctrine()->getRepository(Post::class)->findOneBySlug($slug);
+
         return $this->render('single.html.twig',
             [
-                'chave' => $param
+                'post' => $post
 
             ]);
     }

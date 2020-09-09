@@ -1,50 +1,65 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Homepage
+    Blog Symfony 4
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .posts .post p {
+            margin-top: 20px;
+        }
+
+        .posts .post a {
+            text-decoration: none;
+            color: #3c3f41;
+            transition: color .2s ease-in-out;
+        }
+
+        .posts .post a:hover {
+            color: #7d8484;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col8">
+                <div class="row">
+                    <h1>Postagens</h1>
+                    <hr>
+                </div>
+                <div class="row posts">
+                    {# Lista de Postagens #}
+                    {% for post in posts %}
+                        <div class="col-12 post">
+                            <a href="{{ path('single_post', {slug: post.slug}) }}">
+                                <img src="https://placeimg.com/640/280/any" alt="Imagem Post: {{ post.title }}" class="img-fluid">
+                                <h2>{{ post.title }}</h2>
 
-    <h1>{{ title }}</h1> {# Rece essa variavel de uma array em 'DefalutController' #}
+                                <small>
+                                    Post criado em: {{ post.createdAt|date("d/m/Y H:i:s") }}
+                                    Por {{ post.author.firstName }} {{ post.author.lastName }}
+                                </small>
+                                <p>
+                                    {{ post.description }}
+                                </p>
+                            </a>
+                            <hr>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col4">
 
-    {% if nome is defined %} {# similar ao 'isSet' #}
-        <h2>{{ nome }}</h2>
-    {% endif %}
+            </div>
+        </div>
+    </div>
 
-    {# Lista de Postagens #}
-    {#
-        O laço abaixo varre um array de dados que vem
-        la de DegaultController
-    #}
-    {% for post in posts %}
-        <li>
-            {{ post.id }} - {{ post.title }} -
-            {{ post.created_at|date("d/m/Y H:i:s")}} {# usa pipe "|" p/ filtro de data #}
-        </li>
-    {% endfor %}
-
-    {%  include 'include.html.twig' %} {# Ecemplo de include#}
-
-    {{ 'Tony' ~ ' Silva' }} {# p/ concatenar use o "~" #}
-    <br><br>
-
-    {{ title ~ ' String' }} {# Exemplo de concatenção com variáveis#}
-    <br><br>
-
-    {{ 3 + 4 }} {# Exemplo de operações matemáticas #}
-    <br>
-
-    {{ 7 > 2 ? 'sim' : 'não' }}
+{#    <h1>{{ title }}</h1> #}{# Rece essa variavel de uma array em 'DefalutController' #}
 
 
-    {# ========= FORMATACAO CSS PARA TRABALHAR A NOITE ========== #}
-    <style>
-        /** {*/
-        /*    background-color: #373c49;*/
-        /*    color: #ced4e0;*/
-        /*}*/
-    </style>
 {% endblock %}
 
 
