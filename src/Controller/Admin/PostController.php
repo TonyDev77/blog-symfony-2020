@@ -20,7 +20,24 @@ class PostController extends AbstractController
      */
     public function index()
     {
-        $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
+        $user = $this->getUser(); // obtém usuário
+        //$roles = $user->getRoles(); // obtém papel do usuário
+
+        // SE É AUTHOR, CARREGA APENAS AS POSTAGENS DE AUTHOR
+        if ($this->isGranted('ROLE_AUTHOR')) {
+            $posts = $user->getPosts();
+        }
+        // outra forma de resolver, sera validando arrays:
+        //if (in_array('ROLE_AUTHOR', $roles)) {
+        //    $posts = $user->getPosts();
+        //}
+
+        // SE É ADMIN, CARREGA TODAS AS POSTAGENS
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $posts = $this->getDoctrine()->getRepository(Post::class)->findAll();
+        }
+
+
         return $this->render('post/index.html.twig', [
             'posts' => $posts
         ]);

@@ -156,18 +156,17 @@ class User implements UserInterface
         return $this->first_name . ' ' . $this->last_name;
     }
 
-    // IMPLEMENTA MÉTODOS DA CLASSE UserInterface (security)
+    // IMPLEMENTA MÉTODOS DA CLASSE UserInterface (security) ------------
     public function getRoles()
     {
-        $roles = explode(', ', $this->roles);
-        $roles[] = 'ROLE_USER';
-
-        return $roles;
+        //$roles = explode(', ', $this->roles);
+        //$roles[] = 'ROLE_USER';
+        return explode(', ', $this->roles);;
     }
 
     public function setRoles()
     {
-        $this->roles = 'ROLE_USER';
+        $this->roles = 'ROLE_AUTHOR';
     }
 
     public function getUsername(): ?string
