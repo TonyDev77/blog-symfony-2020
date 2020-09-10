@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Category;
 use App\Entity\Post;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +17,7 @@ class DefaultController extends AbstractController
     // Para passar parâmetros dinâmicos nas 'routes', basta usar chaves {}
 
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      */
     public function index(PaginatorInterface $paginator, Request $request)
     {
@@ -31,7 +32,8 @@ class DefaultController extends AbstractController
         // Abaixo, uma render com array enviando para a index o conjunto 'chave' => 'valor'
         return $this->render('index.html.twig', [
             'title' => 'Postagem Teste', // 'chave' => 'valor'
-            'posts' => $posts
+            'posts' => $posts,
+            'categories' => $this->getCategories()
 
         ]);
     }
@@ -48,8 +50,33 @@ class DefaultController extends AbstractController
 
         return $this->render('single.html.twig',
             [
-                'post' => $post
+                'post' => $post,
+                'categories' => $this->getCategories()
 
             ]);
+    }
+
+    /**
+     * @Route("/category/{slug}", name="single_category")
+     */
+    public function category($slug, PaginatorInterface $paginator, Request $request) // Passagem pela url
+    {
+        // Paginação
+        $page = $request->query->getInt('page', 1);
+        $category = $this->getDoctrine()->getRepository(Category::class)->findOneBySlug($slug);
+        $posts = $paginator->paginate($category->getPosts(), $page, 2);
+
+        return $this->render('category.html.twig',
+            [
+                'category' => $category,
+                'posts' => $posts,
+                'categories' => $this->getCategories()
+
+            ]);
+    }
+
+    private function getCategories() {
+        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        return $categories;
     }
 }
