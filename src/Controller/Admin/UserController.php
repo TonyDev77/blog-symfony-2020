@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Form\UserType;
 //use http\Env\Request;
+use App\service\MailerService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,7 +32,7 @@ class UserController extends AbstractController
     /**
      * @Route("/create", name="create")
      */
-    public function create(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function create(Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerService $mailerService)
     {
 
         $user = new User(); // cria objeto entity User.
@@ -55,6 +56,18 @@ class UserController extends AbstractController
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
             $manager->flush();
+
+            // IMPLEMENTANDO SERVIÇO DO MAILER (envio do email)
+            $data['subject'] = '[Blog-sf4] - Usuário criado com sucesso!';
+            $data['email'] = $user->getEmail();
+            // renderiza uma view especificada
+            $view = $this->renderView('email/new_user.html.twig', [
+                'name' => $user->getFirstName(),
+                'email' => $user->getEmail()
+            ]);
+
+            $mailerService->sendMail($data, $view);
+            //dump($view); die();
 
             $this->addFlash('success', 'Usuário criado com sucesso!'); // Imprime mensagem para o cliente
             return $this->redirectToRoute('user_index');
