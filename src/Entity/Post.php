@@ -62,11 +62,16 @@ class Post
      */
     private $categoryCollection;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
+     */
+    private $commentsCollection;
+
     public function __construct() // criando array p/ trabalhar com tabelas
     {
         $this->categoryCollection = new ArrayCollection();
+        $this->commentsCollection = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -173,6 +178,10 @@ class Post
         $this->categoryCollection->add($categoryCollection);
 
         return $this;
+    }
+
+    public function getCommentsCollection() {
+        return $this->commentsCollection;
     }
 
     // possibilita a impressao na view

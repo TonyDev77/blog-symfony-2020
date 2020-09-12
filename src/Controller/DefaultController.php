@@ -5,7 +5,9 @@ namespace App\Controller;
 
 
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Post;
+use App\Form\CommentType;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,10 +50,14 @@ class DefaultController extends AbstractController
         // busca no banco de dados baseado na coluna slug
         $post = $this->getDoctrine()->getRepository(Post::class)->findOneBySlug($slug);
 
+        // Cria formulário associado com entity Comment
+        $form = $this->createForm(CommentType::class, new Comment());
+
         return $this->render('single.html.twig',
             [
                 'post' => $post,
-                'categories' => $this->getCategories()
+                'categories' => $this->getCategories(),
+                'form' => $form->createView()
 
             ]);
     }

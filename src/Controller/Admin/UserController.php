@@ -65,9 +65,7 @@ class UserController extends AbstractController
                 'name' => $user->getFirstName(),
                 'email' => $user->getEmail()
             ]);
-
             $mailerService->sendMail($data, $view);
-            //dump($view); die();
 
             $this->addFlash('success', 'Usuário criado com sucesso!'); // Imprime mensagem para o cliente
             return $this->redirectToRoute('user_index');
