@@ -13,7 +13,7 @@
                         <h2>{{ post.title }}</h2>
                         <small>
                             Post criado em: {{ post.createdAt|date("d/m/Y H:i:s") }}
-                            Por {{ post.author.firstName }} {{ post.author.lastName }}
+                            Por {{ post.author.firstName }} {{ post.author.lastName }} | Comentários: {{ post.commentsCollection.count() }}
                         </small>
                         <hr>
                     </div>
@@ -25,13 +25,25 @@
                 </div>
 
                 <div class="row">
+                    {% if post.commentsCollection.count() %}
+                        <div class="col-12">
+                            <h3>Comentários</h3>
+                            <hr>
+                            {% for comment in post.commentsCollection %}
+                                <div class="card mb-2 bg-comentario">
+                                    <div class="card-body">
+                                        <strong>{{ comment.name }}</strong> - <strong>{{ comment.email }}</strong>
+                                        <br>
+                                        {{ comment.comment }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     <div class="col-12">
-                        <h3>Comentários</h3>
                         <hr>
-                    </div>
-                    <div class="col-12">
                         <h4>Deixar Comentário</h4>
-                        {{ form_start(form) }}
+                        {{ form_start(form, {action: path('comment_save', { post_id: post.id })}) }}
                             {{ form_widget(form) }}
                             <button type="submit" class="btn btn-sm btn-success mb-5">Enviar comentário</button>
                         {{ form_end(form) }}
@@ -46,6 +58,12 @@
 
 {#    <h1>{{ title }}</h1> #}{# Rece essa variavel de uma array em 'DefalutController' #}
 
+    <style>
+        .bg-comentario {
+            color: #555754;
+            background-color: #f5f4f4;
+        }
+    </style>
 
 {% endblock %}
 
