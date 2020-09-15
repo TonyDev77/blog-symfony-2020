@@ -39,7 +39,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user); // Aqui, criamos o formulário par ser exibido na view
         $form->handleRequest($request); // Para reconhecer se o formulário foi submetido
 
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
             $user = $form->getData(); // Recebe os dados do formulário via post.
 
             // encripta a senha do usuário
@@ -87,7 +87,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user); // Aqui, criamos o formulário par ser exibido na view
         $form->handleRequest($request); // Para reconhecer se o formulário foi submetido
 
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
 
             $user = $form->getData(); // Recebe os dados do formulário via post.
             $user->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));

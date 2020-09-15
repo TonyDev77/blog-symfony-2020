@@ -19,7 +19,7 @@
         <h2>Criação do Usuário</h2>
         <hr>
     {# A vriável 'form' abaixo veio da classe 'UserController' #}
-    {{ form_start(form) }}
+    {{ form_start(form, {attr: {novalidate: "novalidate"}}) }}
         {{ form_widget(form) }}
         <button type="submit" class="btn btn-lg btn-success">Cadastrar Usuário</button> {# A dica é criar o botão de envio aqui, como foi feiro, e não na classe #}
     {{ form_end(form) }}

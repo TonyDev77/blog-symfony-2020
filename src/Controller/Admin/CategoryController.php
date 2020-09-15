@@ -35,7 +35,7 @@ class CategoryController extends AbstractController
         $form = $this->createForm(CategoryType::class, $category); // Aqui, criamos o formulário par ser exibido na view
         $form->handleRequest($request); // Para reconhecer se o formulário foi submetido
 
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
 
             $category = $form->getData(); // Recebe os dados do formulário via post.
             $category->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
@@ -66,7 +66,7 @@ class CategoryController extends AbstractController
         $form = $this->createForm(CategoryType::class, $category); // Aqui, criamos o formulário par ser exibido na view
         $form->handleRequest($request); // Para reconhecer se o formulário foi submetido
 
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
 
             $category = $form->getData(); // Recebe os dados do formulário via post.
             $category->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -21,16 +22,19 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $description;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $content;
 
@@ -52,11 +56,11 @@ class Post
     // RELACIONAMENTOS MUITOS P/ UM -----------------------------
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
+     * @Assert\NotBlank()
      */
     private $author;
 
     // RELACIONAMENTOS MUITOS P/ MUITOS ------------------------
-
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="postCollection")
      */

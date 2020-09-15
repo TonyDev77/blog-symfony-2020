@@ -23,7 +23,7 @@ class CommentController extends AbstractController
         $form = $this->createForm(CommentType::class, new Comment());
         $form->handleRequest($request); // manipula conteúdo do form
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() & $form->isValid()) {
             $doctrine = $this->getDoctrine(); // chama doctrine
             $post = $doctrine->getRepository(Post::class)->find($post_id);
 

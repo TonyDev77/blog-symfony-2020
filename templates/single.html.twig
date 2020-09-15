@@ -42,8 +42,8 @@
                     {% endif %}
                     <div class="col-12">
                         <hr>
-                        <h4>Deixar Comentário</h4>
-                        {{ form_start(form, {action: path('comment_save', { post_id: post.id })}) }}
+                        <h4>Deixe um Comentário</h4>
+                        {{ form_start(form, {attr: {action: path('comment_save', { post_id: post.id }), novalidate: 'novalidate'}}) }}
                             {{ form_widget(form) }}
                             <button type="submit" class="btn btn-sm btn-success mb-5">Enviar comentário</button>
                         {{ form_end(form) }}

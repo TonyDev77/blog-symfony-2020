@@ -53,8 +53,7 @@ class PostController extends AbstractController
         $form = $this->createForm(PostType::class, $post); // Aqui, criamos o formulário par ser exibido na view
         $form->handleRequest($request); // Para reconhecer se o formulário foi submetido
 
-        if ($form->isSubmitted()){
-
+        if ($form->isSubmitted() && $form->isValid()){
             // RECEBENDO DADOS DO FORM
             $post = $form->getData(); // Recebe os dados do formulário via post.
             $post->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
@@ -124,7 +123,7 @@ class PostController extends AbstractController
 
         $form = $this->createForm(PostType::class, $post)->handleRequest($request);
 
-        if ($form->isSubmitted()){
+        if ($form->isSubmitted() && $form->isValid()){
             $post = $form->getData();
             $post->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
 
