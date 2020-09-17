@@ -23,9 +23,10 @@ class CommentController extends AbstractController
         $form = $this->createForm(CommentType::class, new Comment());
         $form->handleRequest($request); // manipula conteúdo do form
 
+        $doctrine = $this->getDoctrine(); // chama doctrine
+        $post = $doctrine->getRepository(Post::class)->find($post_id);
+
         if ($form->isSubmitted() & $form->isValid()) {
-            $doctrine = $this->getDoctrine(); // chama doctrine
-            $post = $doctrine->getRepository(Post::class)->find($post_id);
 
             $comment = $form->getData(); // pega dados do form
             $comment->setPost($post); // passa p/ entity
@@ -37,6 +38,7 @@ class CommentController extends AbstractController
             return $this->redirectToRoute('single_post', ['slug' => $post->getSlug()]);
         }
 
-            return $this->redirectToRoute('home');
+        $this->addFlash('errors', 'Todos os campos do comentário são requeridos!');
+        return $this->redirectToRoute('single_post', ['slug' => $post->getSlug()]);
     }
 }

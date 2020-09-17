@@ -118,15 +118,15 @@ class PostController extends AbstractController
     {
         // Variável que chama os recursos do doctrine para fazer operações tendo como referência o 'id'
         $post = $this->getDoctrine()
-                     ->getRepository(Post::class)
-                     ->find($id);
+            ->getRepository(Post::class)
+            ->find($id);
 
-        $form = $this->createForm(PostType::class, $post)->handleRequest($request);
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
             $post = $form->getData();
             $post->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
-
             //VINCULANDO TABELAS (author/posts)
             //$author = $this->getDoctrine()->getRepository(User::class)->find(1);
             //$post->setAuthor($author);

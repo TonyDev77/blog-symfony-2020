@@ -42,6 +42,7 @@
                     {% endif %}
                     <div class="col-12">
                         <hr>
+{#                        {% include 'includes/messages.html.twig' %}#}
                         <h4>Deixe um Comentário</h4>
                         {{ form_start(form, {attr: {action: path('comment_save', { post_id: post.id }), novalidate: 'novalidate'}}) }}
                             {{ form_widget(form) }}
