@@ -47,11 +47,6 @@ class UserController extends AbstractController
             $user->setPassword($password); // passa a senha para ser encriptada
             $user->setRoles();
 
-            //$user->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
-            //$user->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
-
-            //dump($user); // Esse é um debug do próprio symfony (User é um array com a coleção de dados do formulário.
-
             // GRAVANDO NO BANCO DE DADOS
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
@@ -90,7 +85,6 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
 
             $user = $form->getData(); // Recebe os dados do formulário via post.
-            //$user->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
 
             // ATUALIZANDO NO BANCO DE DADOS
             $manager = $this->getDoctrine()->getManager();

@@ -56,12 +56,6 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             // RECEBENDO DADOS DO FORM
             $post = $form->getData(); // Recebe os dados do formulário via post.
-            //$post->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
-            //$post->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
-
-            //VINCULANDO TABELAS (author/posts)
-            //$author = $this->getDoctrine()->getRepository(User::class)->find(1);
-            //$post->setAuthor($author);
 
             // GRAVANDO NO BANCO DE DADOS
             $manager = $this->getDoctrine()->getManager();
@@ -75,9 +69,6 @@ class PostController extends AbstractController
         return $this->render('post/create.html.twig', [
             'form' => $form->createView() // Manda as informações necessárias para a view ser montada com base nesse objeto
         ]);
-
-
-//        return $this->render('post/create.html.twig');
     }
 
     /**
@@ -126,11 +117,6 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             $post = $form->getData();
-            //$post->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
-
-            //VINCULANDO TABELAS (author/posts)
-            //$author = $this->getDoctrine()->getRepository(User::class)->find(1);
-            //$post->setAuthor($author);
 
             $manager = $this->getDoctrine()->getManager();
             $manager->flush();

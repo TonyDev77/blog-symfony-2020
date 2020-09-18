@@ -38,8 +38,6 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
 
             $category = $form->getData(); // Recebe os dados do formulário via post.
-            //$category->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
-            //$category->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
 
             // GRAVANDO NO BANCO DE DADOS
             $manager = $this->getDoctrine()->getManager();
@@ -69,8 +67,6 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
 
             $category = $form->getData(); // Recebe os dados do formulário via post.
-            //$category->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
-            //$category->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
 
             // GRAVANDO NO BANCO DE DADOS
             $manager = $this->getDoctrine()->getManager();
