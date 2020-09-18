@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -41,6 +42,18 @@ class Comment
      * @ORM\ManyToOne(targetEntity="Post", inversedBy="commentsCollection")
      */
     private $post;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Gedmo\Timestampable()
+     */
+    private $updated_at;
 
     public function getId(): ?int
     {
@@ -97,6 +110,30 @@ class Comment
     public function setPost($post): void
     {
         $this->post = $post;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
     }
 
 

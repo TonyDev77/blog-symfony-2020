@@ -56,8 +56,8 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             // RECEBENDO DADOS DO FORM
             $post = $form->getData(); // Recebe os dados do formulário via post.
-            $post->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
-            $post->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
+            //$post->setCreatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
+            //$post->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
 
             //VINCULANDO TABELAS (author/posts)
             //$author = $this->getDoctrine()->getRepository(User::class)->find(1);
@@ -126,7 +126,8 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             $post = $form->getData();
-            $post->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
+            //$post->setUpdatedAt(new \DateTime('now', new \DateTimeZone('America/Recife')));
+
             //VINCULANDO TABELAS (author/posts)
             //$author = $this->getDoctrine()->getRepository(User::class)->find(1);
             //$post->setAuthor($author);

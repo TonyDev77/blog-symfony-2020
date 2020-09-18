@@ -34,6 +34,8 @@
                                     <div class="card-body">
                                         <strong>{{ comment.name }}</strong> - <strong>{{ comment.email }}</strong>
                                         <br>
+                                        <small>Comentado em {{ comment.createdAt|date("d/m/Y H:i:s") }}</small>
+                                        <br>
                                         {{ comment.comment }}
                                     </div>
                                 </div>

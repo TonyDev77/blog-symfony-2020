@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -40,16 +41,19 @@ class Post
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $created_at;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable()
      */
     private $updated_at;
 
@@ -68,6 +72,7 @@ class Post
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
+     * @ORM\OrderBy({"created_at" = "Desc"})
      */
     private $commentsCollection;
 
