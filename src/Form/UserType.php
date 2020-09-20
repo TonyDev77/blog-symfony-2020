@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,9 +17,9 @@ class UserType extends AbstractType
         $builder
             ->add('first_name')
             ->add('last_name')
-            ->add('email')
+            ->add('email', EmailType::class)
             ->add('username')
-            ->add('password')
+            ->add('password', PasswordType::class)
             // Os dados abaixo não precisam aparecer na view, pois serão automáticos
 //            ->add('created_at')
 //            ->add('updated_at')
