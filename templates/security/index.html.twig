@@ -4,9 +4,9 @@
 
 {% block body %}
     <div class="row justify-content-center">
-        <div class="col-4">
+        <div class="col-4 login">
             <div class="col-12">
-                <h2>Faça seu login</h2>
+                <h2 class="texto-login">Login</h2>
                 <hr>
             </div>
             {% if error %}
@@ -30,4 +30,15 @@
             </div>
         </div>
     </div>
+
+    <style>
+        .login{
+            margin-top: 30px;
+            font-family: Futura;
+        }
+
+        .texto-login {
+            text-align: center;
+        }
+    </style>
 {% endblock %}
